@@ -54,30 +54,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			</div>
 			<div class="header-middle">
-			  <div class="header-search">
-				<div class="search">
-					<input type="search" value="Search" id="search" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" >
+				<div class="header-search">
+					<div class="search">
+						<input type="search" value="Search" id="search" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" >
+					</div>
+					<div class="section_room">
+						<!--Add the query for hospitals in db-->
+						<select id="pharmacies" class="frm-field required">
+							<option value="All">All Pharmacies</option>
+							<option value="Seif">Seif</option>
+							<option value="El-Ezaby">El-Ezaby</option>
+							<option value="Amer">Amer</option>
+						</select>
+					</div>
+					<div class="sear-sub">
+						<!--The search button-->
+						<input onclick="search()" type="submit" value=" ">
+					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="section_room">
-
-
-					<!--Add the query for hospitals in db-->
-					<select id="pharmacies" onchange="change_country(this.value)" class="frm-field required">
-						<option value="All">All Pharmacies</option>
-						<option value="Seif">Seif</option>
-						<option value="El-Ezaby">El-Ezaby</option>
-						<option value="Amer">Amer</option>
-
-					</select>
-				</div>
-				<div class="sear-sub">
-					<!--The search button-->
-					<input onclick="search()" type="submit" value=" ">
-				</div>
-				<div class="clearfix"></div>
-
-		</div>
-	</div>
+			</div>
 		<!--header-top-->
 			<div class="header-top">
 			  <div class="container">
