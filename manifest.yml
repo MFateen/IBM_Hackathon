@@ -3,8 +3,8 @@ applications:
   memory: 512M
   instances: 1
   domain: mybluemix.net
-  name: HackathonTemp
-  host: HackathonTemp
+  name: medsondemand
+  host: medsondemand
   disk_quota: 1024M
   services:
   - HackathonTemp-cloudantNoSQLDB
