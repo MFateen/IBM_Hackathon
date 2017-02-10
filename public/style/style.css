@@ -1107,6 +1107,34 @@ p.sub-para {
     width: 21.2%;
 }
 /*--news--*/
+
+
+
+
+.cart-button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #23b5b9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.cart-button:hover {background-color: #1facaf}
+
+.cart-button:active {
+  background-color: #127a7c;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
 .bottom {
     background: url(../images/middle.jpg) no-repeat 0px 0px;
     min-height: 450px;
