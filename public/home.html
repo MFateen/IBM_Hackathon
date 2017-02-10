@@ -726,25 +726,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<!--end-smooth-scrolling-->
 		<a href="#house" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	<script src="scripts/bootstrap.js"></script>
-	<script>
-		function search() {
-  		console.log($("#search").val() + " " + $("#pharmacies").val());
-  		$.post("/search", {
-  			medicine: $("#search").val(),
-  			pharmacy: $("#pharmacies").val()
-  		}, function(data, status){
-  			if(data === "success"){
-  				console.log("hohohohoho");
-  			//	window.location.href = "home.html";
-  				window.location.assign(window.location.href+"home.html");
-  			} else {
-  				alert("wrong username or passsword");
-  			}
-
-
-  		});
-  	}
-	</script>
+	<script src="scripts/search.js"></script>
 
 </body>
 </html>
