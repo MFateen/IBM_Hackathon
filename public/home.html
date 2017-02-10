@@ -72,7 +72,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="sear-sub">
 					<!--The search button-->
-					<input id="submitSearch" type="submit" value=" ">
+					<input onclick="search()" type="submit" value=" ">
 				</div>
 				<div class="clearfix"></div>
 
@@ -99,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 						  <div class="top-menu">
 							<nav class="menu menu--francisco">
-									<ul class="nav navbar-nav menu__list">
+									<ul class="nav navbar-nav minputlist">
 										<li class="menu__item menu__item--current"><a href="home.html" class="menu__link"><span class="menu__helper">Home</span></a></li>
 										<li class="menu__item"><a href="about.html" class="menu__link"><span class="menu__helper">About Us</span></a></li>
 										<li class="menu__item"><a href="profile.html" class="menu__link"><span class="menu__helper">Profile</span></a></li>
@@ -477,7 +477,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 								</li>
 								<li>
-									<a href="single.html"><img src="images/n4.jpg" alt=""/></a>
+									<a href="sing</h4>le.html"><img src="images/n4.jpg" alt=""/></a>
 									<div class="slide-title"><h4>LOREM IPSUM DOLOR</h4></div>
 									<div class="prom-bottom">
 									<div class="prom-left">
@@ -726,6 +726,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<!--end-smooth-scrolling-->
 		<a href="#house" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	<script src="scripts/bootstrap.js"></script>
+	<script>
+		function search() {
+  		console.log($("#search").val() + " " + $("#pharmacies").val());
+  		$.post("/search", {
+  			medicine: $("#search").val(),
+  			pharmacy: $("#pharmacies").val()
+  		}, function(data, status){
+  			if(data === "success"){
+  				console.log("hohohohoho");
+  			//	window.location.href = "home.html";
+  				window.location.assign(window.location.href+"home.html");
+  			} else {
+  				alert("wrong username or passsword");
+  			}
+
+
+  		});
+  	}
+	</script>
 
 </body>
 </html>

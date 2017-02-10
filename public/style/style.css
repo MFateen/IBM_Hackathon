@@ -140,7 +140,7 @@ a i.dribble {
     background-size: 5% !important;
     -webkit-appearance: none;
 }
-.header-middle form input[type="submit"]{
+.header-middle input[type="submit"]{
     background: url(../images/search.png) no-repeat 4px 0px #e45753;
     width: 100%;
     height: 50px;
