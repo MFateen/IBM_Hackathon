@@ -1,4 +1,4 @@
-/*--A Design by W3layouts 
+/*--A Design by W3layouts
 Author: W3layout
 Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
@@ -19,7 +19,7 @@ font-family: 'Open Sans', sans-serif!important;
 }
 a:hover{
  text-decoration:none;
- 
+
 }
 input[type="button"],input[type="submit"],li.parallelogram{
 	transition:0.5s all;
@@ -29,8 +29,8 @@ input[type="button"],input[type="submit"],li.parallelogram{
 	-ms-transition:0.5s all;
 }
 h1,h2,h3,h4,h5,h6{
-   margin:0;	
-}	
+   margin:0;
+}
 p {
     margin: 0;
     font-family: 'Open Sans', sans-serif!important;
@@ -85,7 +85,7 @@ span.glyphicon.glyphicon-earphone,span.glyphicon.glyphicon-map-marker {
 .social-icons ul li{
 	display:inline-block;
 	margin-right:3px;
-	
+
 }
 a i.facebook {
   background:#3b5999 url('../images/img-sprite.png') no-repeat 4px -28px;
@@ -155,11 +155,11 @@ a i.dribble {
 }
 .section_room{
     float: left;
-    width: 33%;	
+    width: 33%;
 }
 .sear-sub{
     float: right;
-    width: 10%;		
+    width: 10%;
 }
 .header-middle {
     padding: 9px 0px;
@@ -519,8 +519,8 @@ a.navbar-brand img {
 	-mz-border-radius: 50%;
 	ms-border-radius: 50%;
 	content: '';
-	-webkit-box-sizing: content-box; 
-	-moz-box-sizing: content-box; 
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 }
 
@@ -537,7 +537,7 @@ a.navbar-brand img {
 .hi-icon-effect-7 .hi-icon {
 	-webkit-transition: background 0.2s, color 0.2s;
 	-moz-transition: background 0.2s, color 0.2s;
-	transition: background 0.2s, color 0.2s;	
+	transition: background 0.2s, color 0.2s;
 }
 
 .hi-icon-effect-7 .hi-icon:hover {
@@ -1063,7 +1063,7 @@ p.sub-para {
 }
 .prom-right{
 	padding: 1em;
-	
+
 }
 /*** Navigation ***/
 .nbs-flexisel-nav-left, .nbs-flexisel-nav-right {
@@ -1083,7 +1083,7 @@ p.sub-para {
 .nbs-flexisel-nav-right {
    left: 47%;
     background: url(../images/arrow.png) no-repeat 0px -2px;
-}	
+}
 .review-slider {
     padding: 6em 0 10em 0;
 }
@@ -1292,7 +1292,7 @@ ul.ab li a:hover{
 .grid_4{
 	background:#fff;
 	padding:0em 0em 0em 0em;
-}  
+}
 .grid_5{
 	background:#fff;
 	padding:1em 0 2em 0;
@@ -1450,10 +1450,10 @@ ol {
 /*--//typography--*/
 /*----*/
 .text-desc{
-	position: absolute; 
+	position: absolute;
 	left: 0; top: 0;
 	 background-color:#ea4c89;
-	 height: 100%; 
+	 height: 100%;
 	 opacity: 0;
 	 width: 100%;
 	 padding: 20px;
@@ -1461,8 +1461,8 @@ ol {
 /* effect-7 css */
 .port{
 	float: left;
-	 width: 100%; 
-	 position: relative; 
+	 width: 100%;
+	 position: relative;
 	 overflow: hidden;
 	 text-align: center;
 	 overflow: hidden;
@@ -1482,7 +1482,7 @@ ol {
 	line-height:1.9em;
  }
 .port.effect-1 img{
-	transition: 0.5s; 
+	transition: 0.5s;
 	position: relative;
 	 width: 100%;
 	 left: 0;
@@ -1491,15 +1491,15 @@ ol {
 	left: 50%;
 }
 .port.effect-1 .text-desc{
-	transform: perspective(600px) rotateY(90deg); 
+	transform: perspective(600px) rotateY(90deg);
 	transform-origin: left center 0;
 	 width: 50%;
 	 position: absolute;
-	 left: 0; top: 0; 
+	 left: 0; top: 0;
 	 padding: 4em 0.7em;
  }
 .port.effect-1:hover .text-desc{
-	opacity: 1; 
+	opacity: 1;
 	transform: perspective(600px) rotateY(0deg);
 	 z-index: 99;
 }
@@ -1513,7 +1513,7 @@ ol {
 }
 .item {
 	text-align:center;
-	position:relative;			
+	position:relative;
 }
 .item,
 .item-hover,
@@ -1521,30 +1521,30 @@ ol {
 .item-img,
 .item-info {
 	width: 100%;
-	    height: 291px;					
+	    height: 291px;
 }
 .item-hover,
 .item-hover .mask,
-.item-img { 
+.item-img {
 	position:absolute;
 	top:0;
-	left:0;			
+	left:0;
 }
 .item-info {
        padding-top: 92px;
-}			
-.item-type-double .item-hover {	
-	z-index:5;	
+}
+.item-type-double .item-hover {
+	z-index:5;
 	-webkit-transition: all 300ms ease-out;
 	-moz-transition: all 300ms ease-out;
 	-o-transition: all 300ms ease-out;
 		-ms-transition: all 300ms ease-out;
-	transition: all 300ms ease-out;	
+	transition: all 300ms ease-out;
 	opacity:0;
-	cursor:pointer;			
+	cursor:pointer;
 	display:block;
 	text-decoration:none;
-	text-align:center;							
+	text-align:center;
 }
 .item-type-double .item-info {
     z-index: 10;
@@ -1553,12 +1553,12 @@ ol {
     position: relative;
     z-index: 5;
     text-align: center;
-    width: 100%;				 					
+    width: 100%;
 }
 .item-type-double .item-info .headline {
-	font-size:15px;			
+	font-size:15px;
 	width:90%;
-	margin:0 auto;		
+	margin:0 auto;
 }
 .item-type-double .item-info .line {
 	height:2px;
@@ -1569,8 +1569,8 @@ ol {
 	-moz-transition: all 300ms ease-out;
 	-ms-transition: all 300ms ease-out;
 	-o-transition: all 300ms ease-out;
-	transition: all 300ms ease-out;					 
-}				
+	transition: all 300ms ease-out;
+}
 .item-type-double .item-info .date {
     font-size: 35px;
        color: #23b5b9;
@@ -1578,7 +1578,7 @@ ol {
     text-transform: uppercase;
 }
 .item-type-double .item-hover .mask {
-	background-color:#000;										
+	background-color:#000;
 	opacity:0.6;
 	z-index:0;
 }
@@ -1587,9 +1587,9 @@ ol {
 }
 .item-type-double .item-hover:hover {
 	opacity:1;
-}							
-.item-img {			
-	z-index:0;			
+}
+.item-img {
+	z-index:0;
 }
 .filtr-item {
     padding-top: 30px;
@@ -1718,7 +1718,7 @@ h3.tittle.three {
     font-weight: 400;
     margin: 0.5em 0;
 }
-.contact-form input[type="text"],.contact-form textarea{
+.contact-form input[type="text"],.contact-form input[type="email"],.contact-form input[type="password"],.contact-form input[type="tel"],.contact-form textarea{
 		       padding:16px 15px;
 			display:block;
 			width:100%;
@@ -1820,7 +1820,7 @@ ul.social-share{
 	float:left;
 }
 ul.social-share li{
-	display: inline-block;	
+	display: inline-block;
 }
 ul.social-share li span{
 	color: #333;
@@ -1883,7 +1883,7 @@ i.arrow:hover{
 .comments-top-top{
 	background: #F4F4F4;
 }
-.men{	
+.men{
     background: #333;
     float: left;
     width: 9%;
@@ -1958,7 +1958,7 @@ p.reply i{
 p.reply i:hover{
     background: url(../images/icons.png)no-repeat -174px -23px;
 }
-.single-us input[type="text"],.leave textarea,.leave input[type="submit"] {
+.single-us input[type="text"],.leave textarea,.single-us input[type="email"],.single-us input[type="password"],.single-us input[type="tel"], .leave input[type="submit"] {
   font-size: 1em;
   width: 100%;
   padding: 0.8em 1em;
@@ -2148,10 +2148,10 @@ float:left;
 }
 @media (max-width: 1366px) {
 
-	
+
 }
 @media (max-width:1280px) {
-	
+
 }
 @media (max-width:1080px) {
 	.nav-tabs>li>a {
@@ -2163,7 +2163,7 @@ float:left;
 		margin-top: 0em;
 		font-size: 0.9em;
 	}
-	.span_1_of_2 h4 { 
+	.span_1_of_2 h4 {
       font-size: 1em;
 	}
 	.sub-hd h3.tittle {
@@ -2262,7 +2262,7 @@ float:left;
 		font-size:1em;
 		margin: 0;
 	}
-	
+
 	.nbs-flexisel-nav-left, .nbs-flexisel-nav-right {
 		width: 45px;
 		height:53px;
@@ -2438,7 +2438,7 @@ float:left;
 		margin-top:0em;
 	}
 	.medicinal-w3-grids.one {
-		margin-top: 3em;	
+		margin-top: 3em;
 	}
 	.item, .item-hover, .item-hover .mask, .item-img, .item-info {
 		height: 182px;
@@ -3114,7 +3114,7 @@ float:left;
 		margin: 0.5em 0em;
 		height: 98px;
 	}
-	.single-us input[type="text"], .leave textarea, .leave input[type="submit"] {
+	.single-us input[type="text"], .single-us input[type="email"], .single-us input[type="password"], .single-us input[type="tel"], .leave textarea, .leave input[type="submit"] {
     font-size: 0.9em;
     width: 100%;
     padding: 0.6em 1em;
@@ -3155,7 +3155,7 @@ float:left;
 	.con-text p, .con-text p a {
 		font-size: 1.3em;
 	}
-	.contact-form input[type="text"], .contact-form textarea {
+	.contact-form input[type="text"], .contact-form input[type="email"], .contact-form input[type="password"], .contact-form input[type="tel"], .contact-form textarea {
 		padding: 11px 11px;
 		font-size: 0.9em;
 	}
@@ -3301,7 +3301,7 @@ float:left;
 		font-size:0.9em;
 		margin: 0;
 	}
-	
+
 	.prom-left,.prom-right {
 		padding:0.8em;
 	}
@@ -3410,7 +3410,7 @@ float:left;
 		font-size: 1em;
 		padding: 12px 0;
 	}
-	.contact-form input[type="text"], .contact-form textarea {
+	.contact-form input[type="text"], .contact-form input[type="email"], .contact-form input[type="tel"], .contact-form input[type="password"], .contact-form textarea {
 		padding: 9px 10px;
 		font-size: 0.9em;
 	}
