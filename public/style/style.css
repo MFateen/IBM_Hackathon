@@ -1199,6 +1199,24 @@ ul.times i{
     text-align: center;
     padding-top: 7.8em;
 }
+
+.sub-hd-inner-left h3.tittle {
+    font-size: 3em;
+    font-weight: 300;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif!important;
+}
+.sub-hd-inner-left  h3.tittle span {
+    color: #23B5B9;
+    font-weight: 700;
+    font-family: 'Montserrat',sans-serif!important;
+}
+
+.sub-hd-inner-left{
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 7.8em;
+}
 .main-textgrids {
         padding: 5em 0 5em 0;
 }
