@@ -5,8 +5,8 @@
   <meta name="keywords" content="Medicinal Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
   Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 
-  <link rel="stylesheet" type="text/css" href="style/theme.css">
   <link href="style/bootstrap.css" rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" href="style/theme.css">
   <link href="style/style.css" rel='stylesheet' type='text/css' />
   <link rel="stylesheet" href="style/slider.css">
   <script src="scripts/jquery-1.11.1.min.js"></script>
@@ -33,46 +33,27 @@
     <!--header-top-->
     <div class="header-top">
       <div class="container">
-         <nav class="navbar navbar-default">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
-          <div class="logo">
-            <h1><a class="navbar-brand" href="home.html"><span>M</span>eds On Demand  <!--<img src="images/logo.png" alt=" " />--></a></h1>
-          </div>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-            <div class="top-menu">
-            <nav class="menu menu--francisco">
-                <ul class="nav navbar-nav menu__list">
-                  <li class="menu__item menu__item--current"><a href="home.html" class="menu__link"><span class="menu__helper">Home</span></a></li>
-                  <li class="menu__item"><a href="about.html" class="menu__link"><span class="menu__helper">About Us</span></a></li>
-                  <li class="menu__item"><a href="profile.html" class="menu__link"><span class="menu__helper">Profile</span></a></li>
-                  <li class="menu__item"><a href="contact.html" class="menu__link"><span class="menu__helper">Contact Us</span></a></li>
-                  <li class="menu__item"><a href="typography.html" class="menu__link"><span class="menu__helper">Sign Out</span></a></li>
-                </ul>
-              </nav>
+        <nav class="navbar navbar-default" style=" padding-left: 30%; margin-bottom: 2rem;">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <div class="logo">
+              <h1><a class="navbar-brand" href="home.html"><span>M</span>eds On Demand  <!--<img src="images/logo.png" alt=" " />--></a></h1>
             </div>
-        </div>
-        <!-- /.navbar-collapse -->
-      </nav>
+          </div>
+        </nav>
 
-       <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+      </div>
     </div>
     <!--//header-top-->
 
-  <div class="pen-title">
-    <h1>Welcome to HackathonTemp</h1>
-  </div>
-  <div class="container">
+  <div class="container-login">
     <div class="card"></div>
     <div class="card">
       <h1 class="title">Login</h1>
@@ -181,11 +162,11 @@
   </div>
   <script>
   $('.toggle').on('click', function() {
-    $('.container').stop().addClass('active');
+    $('.container-login').stop().addClass('active');
   });
 
   $('.close').on('click', function() {
-    $('.container').stop().removeClass('active');
+    $('.container-login').stop().removeClass('active');
   });
 
   </script>
