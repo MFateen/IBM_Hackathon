@@ -57,7 +57,6 @@
     <div class="card"></div>
     <div class="card">
       <h1 class="title">Login</h1>
-      <form>
         <div class="input-container">
           <input id="username" name="username" required/>
           <label for="username">Username</label>
@@ -69,10 +68,9 @@
           <div class="bar"></div>
         </div>
         <div class="button-container">
-          <button><span>Go</span></button>
+          <button action="post" onclick="logmein()"><span>Go</span></button>
         </div>
         <div class="footer"><a href="#">Forgot your password?</a></div>
-      </form>
     </div>
     <div class="card alt">
       <div class="toggle"></div>
@@ -95,8 +93,23 @@
           <label for="renewpassword">Repeat Password</label>
           <div class="bar"></div>
         </div>
+        <div class="input-container">
+          <input type="email" id="email" name="email" required/>
+          <label for="email">Email</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input type="text" id="address" name="address" required/>
+          <label for="address">Address</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input type="tel" id="tel" name="tel" required/>
+          <label for="tel">Mobile Number</label>
+          <div class="bar"></div>
+        </div>
         <div class="button-container">
-          <button><span>Next</span></button>
+          <button onclick="registerme()"><span>Next</span></button>
         </div>
       </form>
     </div>
@@ -169,6 +182,47 @@
     $('.container-login').stop().removeClass('active');
   });
 
+  </script>
+  <script ></script>
+  <script>
+  	function registerme() {
+  		console.log($("#username").val() + " " + $("#password").val());
+  		if( $("#newpassword").val() !== $("#renewpassword").val() ) {
+  			return;		
+  		}
+  		
+  		$.post("/registerme", {
+  			name: $("#newusername").val(),
+  			password: $("#newpassword").val(),
+  			email: $("#email").val(),
+  			address: $("#address").val(),
+  			tel: $("#tel").val()
+  		}, function(data, status){
+  			if(data === "success"){
+  				window.location.assign(window.location.href+"home.html");
+  			} else {
+  				alert("existing username");
+  			}
+  		});
+  	}
+  	
+  	function logmein() {
+  		console.log($("#username").val() + " " + $("#password").val());
+  		$.post("/logmein", {
+  			name: $("#username").val(),
+  			password: $("#password").val()
+  		}, function(data, status){
+  			if(data === "success"){
+  				console.log("hohohohoho");
+  			//	window.location.href = "home.html";
+  				window.location.assign(window.location.href+"home.html");
+  			} else {
+  				alert("wrong username or passsword");
+  			}
+
+
+  		});
+  	}
   </script>
 </body>
 </html>

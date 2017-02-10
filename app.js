@@ -258,6 +258,21 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
 
 });
 
+var username = "mo";
+var password = "n";
+
+app.post('/logmein', function(request, response) {
+	if((request.body.name ===  username) && (request.body.password === password)) {
+		response.write("success");
+		console.log("wowowowowowowowo");
+	} else {
+		response.write("failed");
+		console.log("nononononononbono");
+	}
+	console.log("Bbkabksbkabskdabksbdksa \n blablablabalbalbla \n" + request.body.name + " " + request.body.password);
+	response.end();
+});
+
 app.post('/api/favorites', function(request, response) {
 
     console.log("Create Invoked..");
