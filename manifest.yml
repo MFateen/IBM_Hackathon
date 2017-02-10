@@ -1,0 +1,10 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: HackathonTemp
+  host: HackathonTemp
+  disk_quota: 1024M
+  services:
+  - HackathonTemp-cloudantNoSQLDB
