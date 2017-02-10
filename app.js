@@ -15,6 +15,7 @@ var db;
 
 var cloudant;
 
+
 var fileToUpload;
 
 var dbCredentials = {
@@ -27,6 +28,12 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var multipart = require('connect-multiparty')
 var multipartMiddleware = multipart();
+var Cloudant = require('cloudant');
+
+var me = 'e8866ed5-22a3-42c8-9b1a-dacc5aea5704-bluemix'; // Set this to your own account 
+var password = 'ce30b6047a0a299355c2d6b00e4200f39f11b2165add1568d5ad66415e72dcf9';
+
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -257,12 +264,28 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
     });
 
 });
-
-var username = "mo";
-var password = "n";
+/////////////////////////////////////////////////////////////////////////////////////////
+var username;
+var userpassword;
+var userdata;
 
 app.post('/logmein', function(request, response) {
-	if((request.body.name ===  username) && (request.body.password === password)) {
+	
+    
+    var cloudant2 = Cloudant({account:me, password:password});
+	var userdb = cloudant2.db.use("client");
+	console.log("Yo estoy Mostafa ");
+    userdb.get(request.body.name, function(err, data) {
+
+
+    // The rest of your code goes here. For example:
+    console.log("Found User:", data);
+    
+//    userdata = JSON.parse(data);
+    
+//    username = userdata._id;
+//    userpassword = userdata.passwor
+	if((request.body.name ===  data._id) && (request.body.password === data.password)) {
 		response.write("success");
 		console.log("wowowowowowowowo");
 	} else {
@@ -271,7 +294,14 @@ app.post('/logmein', function(request, response) {
 	}
 	console.log("Bbkabksbkabskdabksbdksa \n blablablabalbalbla \n" + request.body.name + " " + request.body.password);
 	response.end();
+    });
+	
+	
 });
+
+
+
+
 
 app.post('/api/favorites', function(request, response) {
 
