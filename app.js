@@ -265,6 +265,7 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
 
   });
   /////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////// loigin
   //var username;
   //var userpassword;
   //var userdata;
@@ -291,12 +292,73 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
     });
   });
 
-
+/////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////// search
 
 
   app.post('/search', function(request, response) {
+    
+    //	var medname = "sth";
+	
+	
     var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
+    db1.get(request.pharmacy, function(err, data) {
+      if (err) {
+        return console.log("Failed to get data: " + err.message);
+      }
+      // The rest of your code goes here. For example:
+      console.log("Found pharmacy data: ", data);
+      //var json = JSON.parse(data);
+      //var  medName = "panadol";
+      var count;
+      var pharName = data._id;
+      var pharLoc = data.location;
+      var pharNum = data.phone;
+      var pharEmail = data.email;
+      var medName;
+      var medPrice;
+      var medAmount;
+      var medAvailable = "Not Available";
+      var jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ request.medicine +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
+	  for(count = 0 ; count < data.medicine.length ; count++){
+        if(data.medicine[count].name == request.medicine){
+          medName = data.medicine[count].name;
+          medPrice = data.medicine[count].Price;
+          medAmount = data.medicine[count].Amount;
+          if(medAmount > 0 ){
+            medAvailable = "Available";
+          }
+          jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ request.medicine +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
+         
+         
+        
+     	
+          break;
+        }
+      }
+       //jsonReturn = JSON.parse(foundstring);
+      console.log('my found name is ' + medName);
+      console.log('my found price is ' + medPrice);
+      console.log('my found amount is ' + medAmount);
+          
+          
+      console.log('my return json is  ' + jsonstring);
+      var jsonReturn = JSON.parse(jsonstring);
+          
+      response.write(jsonReturn);
+      response.end();
+      
+    });
+    
+    /*var cloudant1 = Cloudant({account:me, password:password});
+    var db1 = cloudant1.db.use("medicine");
+    
+    if(request.pharmacy == "All"){
+    	
+    }
+    
+    
     db1.get(request.pharmacy, function(err, data) {
       if (err) {
         return console.log('Failed to get data: ' + err.message);
@@ -323,16 +385,16 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
           }
           jsonstring = '{"_id": "'+ pharName +'" , "location": "'+ pharLoc +'" ,  "phone" :  "'+ pharNum +'" , "email" : "'+ pharEmail +'" , "name" : "'+ medName +'" , "Price" : "'+ medPrice +'" , "Amount" : "'+ medAvailable +'"}';
           jsonReturn = JSON.parse(foundstring);
-          /*console.log('my found name is ' +  json.medicine[count].name);
+          console.log('my found name is ' +  json.medicine[count].name);
           console.log('my found price is ' + json.medicine[count].Price);
           console.log('my found amount is ' + json.medicine[count].Amount);
-          */
+          
           break;
         }
       }
       response.write(jsonReturn);
       response.end();
-    });
+    });*/
   });
 
 
