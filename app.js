@@ -382,7 +382,129 @@ app.post('/addcart', function(request, response) {
 	
 	console.log("Current User : " + JSON.stringify(request.session.user));
 
+  
+  
+  
+  
+  
+  
+  
+  	var all_phrmacies = ["Amer", "Seif", "El-Ezaby"];
+	
     var cloudant1 = Cloudant({account:me, password:password});
+    var db1 = cloudant1.db.use("medicine");
+    
+    if (Rpharmname !== "all"){
+		  db1.get(Rpharmname, function(err, data) {
+		  if (err) {
+		    return console.log("Failed to get data: " + err.message);
+		  }
+		  // The rest of your code goes here. For example:
+		  console.log("Found pharmacy data: ", data);
+		  //var json = JSON.parse(data);
+		  //var  medName = "panadol";
+		  var count;
+		  var pharName = data._id;
+		  var pharLoc = data.location;
+		  var pharNum = data.phone;
+		  var pharEmail = data.email;
+		  var medAvailable = "Not Available";
+		  var jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
+		  for(count = 0 ; count < data.medicine.length ; count++){
+		    if(data.medicine[count].name == medname){
+		      var medName = data.medicine[count].name;
+		      var medPrice = data.medicine[count].Price;
+		      var medAmount = data.medicine[count].Amount;
+		      if(medAmount > 0 ){
+		        medAvailable = "Available";
+		      }
+		      jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
+		     
+		     
+		    
+		 	
+		      break;
+		    }
+		  }
+		   //jsonReturn = JSON.parse(foundstring);
+		      console.log('my found name is ' + medName);
+		      console.log('my found price is ' + medPrice);
+		      console.log('my found amount is ' + medAmount);
+		      
+		      
+		      console.log('my return json is  ' + jsonstring);
+		      var jsonReturn = JSON.parse(jsonstring);
+		      response.write(jsonReturn);
+              response.end();
+		});
+ 	}else{/*
+ 		 
+ 		get_pharmacy_data("Amer", medname);
+ 		get_pharmacy_data("Seif", medname);
+ 		get_pharmacy_data("El-Ezaby", medname);*/
+ 		
+ 		var ccount;
+ 		var jsonstring = [];
+ 		var jsonstring1;
+ 
+ 		//jsonstring = "\["
+ 		for (ccount = 0; ccount < all_phrmacies.length; ccount++){
+	 		  db1.get(all_phrmacies[ccount], function(err, data) {
+			  if (err) {
+			    	return console.log("Failed to get data: " + err.message);
+			  }
+			  // The rest of your code goes here. For example:
+			  console.log("Found pharmacy data: ", data);
+			  //var json = JSON.parse(data);
+			  //var  medName = "panadol";
+			  var count;
+			  var pharName = data._id;
+			  var pharLoc = data.location;
+			  var pharNum = data.phone;
+			  var pharEmail = data.email;
+			  var medAvailable = "Not Available";
+			  jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
+			  for(count = 0 ; count < data.medicine.length ; count++){
+			    if(data.medicine[count].name == medname){
+			      var medName = data.medicine[count].name;
+			      var medPrice = data.medicine[count].Price;
+			      var medAmount = data.medicine[count].Amount;
+			      if(medAmount > 0 ){
+			        medAvailable = "Available";
+			      }
+			      jsonstring1 = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
+				  var jsonstring2 = JSON.parse(jsonstring1);
+				  var jj =  {"_id": pharName, "location": pharLoc, "phone": pharNum, "email" : pharEmail, "name": medname, "Price": medPrice, "Amount": medAvailable };
+				  jsonstring.push(jsonstring2);
+				  			 	
+			      break;
+
+			    } }
+			  
+			   //jsonReturn = JSON.parse(foundstring);
+			      console.log('my found name is ' + medName);
+			      console.log('my found price is ' + medPrice);
+			      console.log('my found amount is ' + medAmount);
+			      
+			      
+			      console.log('my return json is  ' + jsonstring);
+			      var jsonReturn = JSON.parse(jsonstring);
+			  response.write(jsonReturn);
+      		  response.end();
+			});
+ 		}
+ 	}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
     db1.get(request.pharmacy, function(err, data) {
       if (err) {
@@ -431,7 +553,39 @@ app.post('/addcart', function(request, response) {
       response.end();
       
     });
-    
+  
+  
+  */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
     /*var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
     
