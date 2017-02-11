@@ -7,6 +7,7 @@ routes = require('./routes'),
 user = require('./routes/user'),
 http = require('http'),
 path = require('path'),
+session = require('client-sessions'),
 fs = require('fs');
 
 var app = express();
@@ -51,6 +52,17 @@ app.use('/style', express.static(path.join(__dirname, '/views/style')));
 if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'mod',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
+
 
 function initDBConnection() {
   //When running on Bluemix, this variable will be set to a json object
@@ -270,7 +282,7 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
   //var userpassword;
   //var userdata;
 
-  app.post('/logmein', function(request, response) {
+ app.post('/logmein', function(request, response) {
     var cloudant2 = Cloudant({account:me, password:password});
     var userdb = cloudant2.db.use("client");
     console.log("Yo estoy Mostafa ");
@@ -281,6 +293,14 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
       //    username = userdata._id;
       //    userpassword = userdata.passwor
       if((request.body.name ===  data._id) && (request.body.password === data.password)) {
+      	// sets a cookie with the user's info
+      	console.log("before session");
+        request.session.user = data;
+        console.log("after session");
+        
+        //redirecting to home.html
+         // response.redirect('/home.html');
+         
         response.write("success");
         console.log("wowowowowowowowo");
       } else {
@@ -300,7 +320,8 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
     
     //	var medname = "sth";
 	
-	
+	console.log("Current User : " + JSON.stringify(request.session.user));
+
     var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
     db1.get(request.pharmacy, function(err, data) {
