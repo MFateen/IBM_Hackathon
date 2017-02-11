@@ -265,9 +265,9 @@ app.post('/api/favorites/attach', multipartMiddleware, function(request, respons
 
 });
 /////////////////////////////////////////////////////////////////////////////////////////
-var username;
-var userpassword;
-var userdata;
+//var username;
+//var userpassword;
+//var userdata;
 
 app.post('/logmein', function(request, response) {
 	
@@ -294,13 +294,69 @@ app.post('/logmein', function(request, response) {
 	}
 	console.log("Bbkabksbkabskdabksbdksa \n blablablabalbalbla \n" + request.body.name + " " + request.body.password);
 	response.end();
-    });
-	
-	
+    });	
 });
 
 
 
+
+app.post('/search', function(request, response) {
+	
+    
+    var cloudant1 = Cloudant({account:me, password:password});
+    var db1 = cloudant1.db.use("medicine");
+	db1.get(request.pharmacy, function(err, data) {
+	if (err) {
+	    return console.log('Failed to get data: ' + err.message);
+	  }	
+	   
+	// The rest of your code goes here. For example: 
+	console.log("Found pharmacy: ", data);
+
+	//var json = JSON.parse(data);
+
+  	//var  medName = "panadol";
+	var count;
+	var pharName = data._id;
+	var pharLoc = data.location;
+	var pharNum = data.phone;
+	var pharEmail = data.email;
+	
+
+	var medAvailable = "Not Available";
+	
+	
+	var jsonstring = '{"_id": "'+ pharName +'" , "location": "'+ pharLoc +'" ,  "phone" :  "'+ pharNum +'" , "email" : "'+ pharEmail +'" , "name" : "'+ request.medicine +'"  , "Amount" : "'+ medAvailable +'"}';
+	var jsonReturn = JSON.parse(jsonstring);
+	
+	
+	for(count = 0 ; count < data.medicine.length ; count++){
+ 		if(data.medicine[count].name == request.medicine){
+ 			var medName = data.medicine[count].name;
+ 			var medPrice = data.medicine[count].Price;
+ 			var medAmount = data.medicine[count].Amount;
+ 			
+ 			if(medAmount > 0 ){
+ 				
+ 				medAvailable = "Available";
+ 			}
+	
+ 		jsonstring = '{"_id": "'+ pharName +'" , "location": "'+ pharLoc +'" ,  "phone" :  "'+ pharNum +'" , "email" : "'+ pharEmail +'" , "name" : "'+ medName +'" , "Price" : "'+ medPrice +'" , "Amount" : "'+ medAvailable +'"}';
+   		jsonReturn = JSON.parse(foundstring);
+   		
+   		/*console.log('my found name is ' +  json.medicine[count].name);
+    	console.log('my found price is ' + json.medicine[count].Price);
+    	console.log('my found amount is ' + json.medicine[count].Amount);
+    	*/
+    	break;
+ 		}
+	}
+	response.write(jsonReturn);
+	response.end();
+    });
+    
+    
+});
 
 
 app.post('/api/favorites', function(request, response) {
