@@ -291,6 +291,9 @@ app.post('/logmein', function(request, response) {
 		//    username = userdata._id;
 		//    userpassword = userdata.passwor
 		if ((request.body.name === data._id) && (request.body.password === data.password)) {
+			console.log("before session");
+        request.session.user = data;
+        console.log("after session");
 			response.write("success");
 			console.log("wowowowowowowowo");
 		} else {
@@ -317,10 +320,10 @@ app.post('/logmein', function(request, response) {
       	console.log("before session");
         request.session.user = data;
         console.log("after session");
-        
+
         //redirecting to home.html
          // response.redirect('/home.html');
-         
+
         response.write("success");
         console.log("wowowowowowowowo");
       } else {
@@ -348,7 +351,7 @@ app.post('/addcart', function(request, response) {
 	var quantity = request.body.quantity;
 
 	console.log(username + " is reserving " + quantity + " " + medicine + " from " + pharmacy);
-	
+
 	pharmdb.get(pharmacy, function(pharmErr, pharmData) {
 		if (pharmErr) {
 			return console.error("Error in retrieving pharmacy data");
@@ -377,23 +380,23 @@ app.post('/addcart', function(request, response) {
 });
 
   app.post('/search', function(request, response) {
-    
+
     //	var medname = "sth";
-	
+
 	console.log("Current User : " + JSON.stringify(request.session.user));
 
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
   	var all_phrmacies = ["Amer", "Seif", "El-Ezaby"];
-	
+
     var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
-    
+
     if (Rpharmname !== "all"){
 		  db1.get(Rpharmname, function(err, data) {
 		  if (err) {
@@ -419,10 +422,10 @@ app.post('/addcart', function(request, response) {
 		        medAvailable = "Available";
 		      }
 		      jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
-		     
-		     
-		    
-		 	
+
+
+
+
 		      break;
 		    }
 		  }
@@ -430,23 +433,23 @@ app.post('/addcart', function(request, response) {
 		      console.log('my found name is ' + medName);
 		      console.log('my found price is ' + medPrice);
 		      console.log('my found amount is ' + medAmount);
-		      
-		      
+
+
 		      console.log('my return json is  ' + jsonstring);
 		      var jsonReturn = JSON.parse(jsonstring);
 		      response.write(jsonReturn);
               response.end();
 		});
  	}else{/*
- 		 
+
  		get_pharmacy_data("Amer", medname);
  		get_pharmacy_data("Seif", medname);
  		get_pharmacy_data("El-Ezaby", medname);*/
- 		
+
  		var ccount;
  		var jsonstring = [];
  		var jsonstring1;
- 
+
  		//jsonstring = "\["
  		for (ccount = 0; ccount < all_phrmacies.length; ccount++){
 	 		  db1.get(all_phrmacies[ccount], function(err, data) {
@@ -476,17 +479,17 @@ app.post('/addcart', function(request, response) {
 				  var jsonstring2 = JSON.parse(jsonstring1);
 				  var jj =  {"_id": pharName, "location": pharLoc, "phone": pharNum, "email" : pharEmail, "name": medname, "Price": medPrice, "Amount": medAvailable };
 				  jsonstring.push(jsonstring2);
-				  			 	
+
 			      break;
 
 			    } }
-			  
+
 			   //jsonReturn = JSON.parse(foundstring);
 			      console.log('my found name is ' + medName);
 			      console.log('my found price is ' + medPrice);
 			      console.log('my found amount is ' + medAmount);
-			      
-			      
+
+
 			      console.log('my return json is  ' + jsonstring);
 			      var jsonReturn = JSON.parse(jsonstring);
 			  response.write(jsonReturn);
@@ -494,16 +497,16 @@ app.post('/addcart', function(request, response) {
 			});
  		}
  	}
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
   /*var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
     db1.get(request.pharmacy, function(err, data) {
@@ -533,10 +536,10 @@ app.post('/addcart', function(request, response) {
             medAvailable = "Available";
           }
           jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ request.medicine +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
-         
-         
-        
-     	
+
+
+
+
           break;
         }
       }
@@ -544,56 +547,56 @@ app.post('/addcart', function(request, response) {
       console.log('my found name is ' + medName);
       console.log('my found price is ' + medPrice);
       console.log('my found amount is ' + medAmount);
-          
-          
+
+
       console.log('my return json is  ' + jsonstring);
       var jsonReturn = JSON.parse(jsonstring);
-          
+
       response.write(jsonReturn);
       response.end();
-      
+
     });
-  
-  
+
+
   */
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
-    
+
     if(request.pharmacy == "All"){
-    	
+
     }
-    
-    
+
+
     db1.get(request.pharmacy, function(err, data) {
       if (err) {
         return console.log('Failed to get data: ' + err.message);
@@ -623,7 +626,7 @@ app.post('/addcart', function(request, response) {
           console.log('my found name is ' +  json.medicine[count].name);
           console.log('my found price is ' + json.medicine[count].Price);
           console.log('my found amount is ' + json.medicine[count].Amount);
-          
+
           break;
         }
       }
