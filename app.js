@@ -3,12 +3,12 @@
 */
 
 var express = require('express'),
-routes = require('./routes'),
-user = require('./routes/user'),
-http = require('http'),
-path = require('path'),
-session = require('client-sessions'),
-fs = require('fs');
+	routes = require('./routes'),
+	user = require('./routes/user'),
+	http = require('http'),
+	path = require('path'),
+	session = require('client-sessions'),
+	fs = require('fs');
 
 var app = express();
 
@@ -54,13 +54,13 @@ if ('development' == app.get('env')) {
 }
 
 app.use(session({
-  cookieName: 'session',
-  secret: 'mod',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
-  httpOnly: true,
-  secure: true,
-  ephemeral: true
+	cookieName: 'session',
+	secret: 'mod',
+	duration: 30 * 60 * 1000,
+	activeDuration: 5 * 60 * 1000,
+	httpOnly: true,
+	secure: true,
+	ephemeral: true
 }));
 
 
@@ -292,8 +292,8 @@ app.post('/logmein', function(request, response) {
 		//    userpassword = userdata.passwor
 		if ((request.body.name === data._id) && (request.body.password === data.password)) {
 			console.log("before session");
-        request.session.user = data;
-        console.log("after session");
+			request.session.user = data;
+			console.log("after session");
 			response.write("success");
 			console.log("wowowowowowowowo");
 		} else {
@@ -305,35 +305,38 @@ app.post('/logmein', function(request, response) {
 	});
 });
 
- app.post('/logmein', function(request, response) {
-    var cloudant2 = Cloudant({account:me, password:password});
-    var userdb = cloudant2.db.use("client");
-    console.log("Yo estoy Mostafa ");
-    userdb.get(request.body.name, function(err, data) {
-      // The rest of your code goes here. For example:
-      console.log("Found User:", data);
-      //    userdata = JSON.parse(data);
-      //    username = userdata._id;
-      //    userpassword = userdata.passwor
-      if((request.body.name ===  data._id) && (request.body.password === data.password)) {
-      	// sets a cookie with the user's info
-      	console.log("before session");
-        request.session.user = data;
-        console.log("after session");
+app.post('/logmein', function(request, response) {
+	var cloudant2 = Cloudant({
+		account: me,
+		password: password
+	});
+	var userdb = cloudant2.db.use("client");
+	console.log("Yo estoy Mostafa ");
+	userdb.get(request.body.name, function(err, data) {
+		// The rest of your code goes here. For example:
+		console.log("Found User:", data);
+		//    userdata = JSON.parse(data);
+		//    username = userdata._id;
+		//    userpassword = userdata.passwor
+		if ((request.body.name === data._id) && (request.body.password === data.password)) {
+			// sets a cookie with the user's info
+			console.log("before session");
+			request.session.user = data;
+			console.log("after session");
 
-        //redirecting to home.html
-         // response.redirect('/home.html');
+			//redirecting to home.html
+			// response.redirect('/home.html');
 
-        response.write("success");
-        console.log("wowowowowowowowo");
-      } else {
-        response.write("failed");
-        console.log("nononononononbono");
-      }
-      console.log("Bbkabksbkabskdabksbdksa \n blablablabalbalbla \n" + request.body.name + " " + request.body.password);
-      response.end();
-    });
-  });
+			response.write("success");
+			console.log("wowowowowowowowo");
+		} else {
+			response.write("failed");
+			console.log("nononononononbono");
+		}
+		console.log("Bbkabksbkabskdabksbdksa \n blablablabalbalbla \n" + request.body.name + " " + request.body.password);
+		response.end();
+	});
+});
 // TODO remove hard coded johndoe
 var username = "johndoe";
 app.post('/addcart', function(request, response) {
@@ -379,142 +382,66 @@ app.post('/addcart', function(request, response) {
 	response.end();
 });
 
-  app.post('/search', function(request, response) {
 
+app.post('/getcart', function(request, response) {
+	console.log("Retreiving the cart..");
+	var cloudant = Cloudant({
+		account: me,
+		password: password
+	});
+	var userdb = cloudant.db.use("client");
+	userdb.get(username, function(userErr, userData) {
+		if (userErr) {
+			return console.error("Error in retrieving user data");
+		}
+
+		response.write(JSON.stringify(userData.cart));
+		response.end();
+	});
+});
+
+
+app.post('/emptycart', function(request, response) {
+	console.log("Emptying the cart..");
+
+	var cloudant = Cloudant({
+		account: me,
+		password: password
+	});
+	var userdb = cloudant.db.use("client");
+
+	userdb.get(username, function(userErr, userData) {
+		if (userErr) {
+			return console.error("Error in retrieving user data");
+		}
+		userData.cart = [];
+
+		userdb.insert(userData, userData.id, function(err, data) {
+			if (err) {
+				console.error('Error updating cart');
+				return 500;
+			}
+			return 200;
+		});
+		
+		response.end();
+	});
+}); 
+
+/* app.post('/search', function(request, response) {
+    
     //	var medname = "sth";
-
+	
 	console.log("Current User : " + JSON.stringify(request.session.user));
 
-
-
-
-
-
-
-
-  	var all_phrmacies = ["Amer", "Seif", "El-Ezaby"];
-
     var cloudant1 = Cloudant({account:me, password:password});
-    var db1 = cloudant1.db.use("medicine");
-
-    if (Rpharmname !== "all"){
-		  db1.get(Rpharmname, function(err, data) {
-		  if (err) {
-		    return console.log("Failed to get data: " + err.message);
-		  }
-		  // The rest of your code goes here. For example:
-		  console.log("Found pharmacy data: ", data);
-		  //var json = JSON.parse(data);
-		  //var  medName = "panadol";
-		  var count;
-		  var pharName = data._id;
-		  var pharLoc = data.location;
-		  var pharNum = data.phone;
-		  var pharEmail = data.email;
-		  var medAvailable = "Not Available";
-		  var jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
-		  for(count = 0 ; count < data.medicine.length ; count++){
-		    if(data.medicine[count].name == medname){
-		      var medName = data.medicine[count].name;
-		      var medPrice = data.medicine[count].Price;
-		      var medAmount = data.medicine[count].Amount;
-		      if(medAmount > 0 ){
-		        medAvailable = "Available";
-		      }
-		      jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
-
-
-
-
-		      break;
-		    }
-		  }
-		   //jsonReturn = JSON.parse(foundstring);
-		      console.log('my found name is ' + medName);
-		      console.log('my found price is ' + medPrice);
-		      console.log('my found amount is ' + medAmount);
-
-
-		      console.log('my return json is  ' + jsonstring);
-		      var jsonReturn = JSON.parse(jsonstring);
-		      response.write(jsonReturn);
-              response.end();
-		});
- 	}else{/*
-
- 		get_pharmacy_data("Amer", medname);
- 		get_pharmacy_data("Seif", medname);
- 		get_pharmacy_data("El-Ezaby", medname);*/
-
- 		var ccount;
- 		var jsonstring = [];
- 		var jsonstring1;
-
- 		//jsonstring = "\["
- 		for (ccount = 0; ccount < all_phrmacies.length; ccount++){
-	 		  db1.get(all_phrmacies[ccount], function(err, data) {
-			  if (err) {
-			    	return console.log("Failed to get data: " + err.message);
-			  }
-			  // The rest of your code goes here. For example:
-			  console.log("Found pharmacy data: ", data);
-			  //var json = JSON.parse(data);
-			  //var  medName = "panadol";
-			  var count;
-			  var pharName = data._id;
-			  var pharLoc = data.location;
-			  var pharNum = data.phone;
-			  var pharEmail = data.email;
-			  var medAvailable = "Not Available";
-			  jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
-			  for(count = 0 ; count < data.medicine.length ; count++){
-			    if(data.medicine[count].name == medname){
-			      var medName = data.medicine[count].name;
-			      var medPrice = data.medicine[count].Price;
-			      var medAmount = data.medicine[count].Amount;
-			      if(medAmount > 0 ){
-			        medAvailable = "Available";
-			      }
-			      jsonstring1 = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ medname +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
-				  var jsonstring2 = JSON.parse(jsonstring1);
-				  var jj =  {"_id": pharName, "location": pharLoc, "phone": pharNum, "email" : pharEmail, "name": medname, "Price": medPrice, "Amount": medAvailable };
-				  jsonstring.push(jsonstring2);
-
-			      break;
-
-			    } }
-
-			   //jsonReturn = JSON.parse(foundstring);
-			      console.log('my found name is ' + medName);
-			      console.log('my found price is ' + medPrice);
-			      console.log('my found amount is ' + medAmount);
-
-
-			      console.log('my return json is  ' + jsonstring);
-			      var jsonReturn = JSON.parse(jsonstring);
-			  response.write(jsonReturn);
-      		  response.end();
-			});
- 		}
- 	}
-
-
-
-
-
-
-
-
-
-
-  /*var cloudant1 = Cloudant({account:me, password:password});
     var db1 = cloudant1.db.use("medicine");
     db1.get(request.pharmacy, function(err, data) {
       if (err) {
         return console.log("Failed to get data: " + err.message);
       }
       // The rest of your code goes here. For example:
-      console.log("Found pharmacy data: ", data);
+      console.log("Found pharmacy data: " + data);
       //var json = JSON.parse(data);
       //var  medName = "panadol";
       var count;
@@ -527,6 +454,8 @@ app.post('/addcart', function(request, response) {
       var medAmount;
       var medAvailable = "Not Available";
       var jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ request.medicine +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
+	  console.log(JSON.stringify(data.medicine));
+	  
 	  for(count = 0 ; count < data.medicine.length ; count++){
         if(data.medicine[count].name == request.medicine){
           medName = data.medicine[count].name;
@@ -536,104 +465,26 @@ app.post('/addcart', function(request, response) {
             medAvailable = "Available";
           }
           jsonstring = "{\"_id\": \""+ pharName +"\" , \"location\": \""+ pharLoc +"\" ,  \"phone\" :  \""+ pharNum +"\" , \"email\" : \""+ pharEmail +"\" , \"name\" : \""+ request.medicine +"\" , \"Price\" : \""+ medPrice +"\" , \"Amount\" : \""+ medAvailable +"\"}";
-
-
-
-
           break;
         }
       }
+     
+     jsonstring = {"name":"mostafa"};
        //jsonReturn = JSON.parse(foundstring);
       console.log('my found name is ' + medName);
       console.log('my found price is ' + medPrice);
       console.log('my found amount is ' + medAmount);
-
-
+          
+          
       console.log('my return json is  ' + jsonstring);
       var jsonReturn = JSON.parse(jsonstring);
-
+          
       response.write(jsonReturn);
       response.end();
-
+      
     });
+  });*/
 
-
-  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*var cloudant1 = Cloudant({account:me, password:password});
-    var db1 = cloudant1.db.use("medicine");
-
-    if(request.pharmacy == "All"){
-
-    }
-
-
-    db1.get(request.pharmacy, function(err, data) {
-      if (err) {
-        return console.log('Failed to get data: ' + err.message);
-      }
-      // The rest of your code goes here. For example:
-      console.log("Found pharmacy: ", data);
-      //var json = JSON.parse(data);
-      //var  medName = "panadol";
-      var count;
-      var pharName = data._id;
-      var pharLoc = data.location;
-      var pharNum = data.phone;
-      var pharEmail = data.email;
-      var medAvailable = "Not Available";
-      var jsonstring = '{"_id": "'+ pharName +'" , "location": "'+ pharLoc +'" ,  "phone" :  "'+ pharNum +'" , "email" : "'+ pharEmail +'" , "name" : "'+ request.medicine +'"  , "Amount" : "'+ medAvailable +'"}';
-      var jsonReturn = JSON.parse(jsonstring);
-      for(count = 0 ; count < data.medicine.length ; count++){
-        if(data.medicine[count].name == request.medicine){
-          var medName = data.medicine[count].name;
-          var medPrice = data.medicine[count].Price;
-          var medAmount = data.medicine[count].Amount;
-          if(medAmount > 0 ){
-            medAvailable = "Available";
-          }
-          jsonstring = '{"_id": "'+ pharName +'" , "location": "'+ pharLoc +'" ,  "phone" :  "'+ pharNum +'" , "email" : "'+ pharEmail +'" , "name" : "'+ medName +'" , "Price" : "'+ medPrice +'" , "Amount" : "'+ medAvailable +'"}';
-          jsonReturn = JSON.parse(foundstring);
-          console.log('my found name is ' +  json.medicine[count].name);
-          console.log('my found price is ' + json.medicine[count].Price);
-          console.log('my found amount is ' + json.medicine[count].Amount);
-
-          break;
-        }
-      }
-      response.write(jsonReturn);
-      response.end();
-    });*/
-  });
 
 
 app.post('/api/favorites', function(request, response) {
