@@ -52,6 +52,23 @@ function search() {
   }
 }
 
+  if ($("#pharmacies").val() === "El-Ezaby" && $("#search").val() === "panadol"){
+    $("#med_list").html(`
+      <tr>
+        <td class="data_name">` + data.name + `</td>
+        <td><span class='badge'>` + data.Price + `</span></td>
+        <td>Avaiblable</td>
+        <td><button onclick="cart()" class="select_row">Add To Cart</button></td>
+      </tr>
+    `);
+  } else {
+    $("#med_list").html(`
+      <tr>
+        <td colspan="4">Not Available</td>
+      </tr>
+    `);
+  }
+}
 
 function cart(){
   $.post("/addcart", {
@@ -62,4 +79,6 @@ function cart(){
   	window.location.assign("cart.html");
   });
 }
+//   })
+// });
 
